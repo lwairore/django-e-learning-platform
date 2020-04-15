@@ -1,7 +1,16 @@
 from django.views.generic.list import ListView
 from .models import Course
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView, \
+    DeleteView
 
 # Create your views here.
+
+
+class OwnerMixin(object):
+    def get_queryset(self):
+        qs = super(OwnerMixin, self).get_queryset()
+        return qs.filter(owner=self.request.user)
 
 
 class ManageCourseListView(ListView):
