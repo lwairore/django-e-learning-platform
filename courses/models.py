@@ -43,7 +43,7 @@ class Module(models.Model):
     order = OrderField(blank=True, for_fields=['course'])
 
     def __str__(self):
-        return self.title
+        return '{}. {}'.format(self.order, self.title)
 
 
 class Content(models.Model):
