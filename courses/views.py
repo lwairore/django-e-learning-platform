@@ -13,6 +13,12 @@ class OwnerMixin(object):
         return qs.filter(owner=self.request.user)
 
 
+class OwnerEditMixin(object):
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super(OwnerEditMixin, self).form_valid(form)
+
+
 class ManageCourseListView(ListView):
     model = Course
     template_name = 'courses/manage/course/list.html'
