@@ -29,10 +29,5 @@ class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
     template_name = 'courses/manage/course/form.html'
 
 
-class ManageCourseListView(ListView):
-    model = Course
+class ManageCourseListView(OwnerCourseMixin, ListView):
     template_name = 'courses/manage/course/list.html'
-
-    def get_queryset(self):
-        qs = super(ManageCourseListView, self).get_queryset()
-        return qs.filter(owner=self.request.user)
