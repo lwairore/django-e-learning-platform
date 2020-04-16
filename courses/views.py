@@ -19,6 +19,10 @@ class OwnerEditMixin(object):
         return super(OwnerEditMixin, self).form_valid(form)
 
 
+class OwnerCourseMixin(OwnerMixin):
+    model = Course
+
+
 class ManageCourseListView(ListView):
     model = Course
     template_name = 'courses/manage/course/list.html'
