@@ -35,3 +35,7 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
 
 class CourseCreateView(OwnerEditMixin, CreateView):
     pass
+
+
+class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
+    pass
