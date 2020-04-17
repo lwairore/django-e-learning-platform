@@ -37,8 +37,8 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
     template_name = 'courses/manage/course/list.html'
 
 
-class CourseCreateView(OwnerCourseEditMixin, CreateView):
-    pass
+class CourseCreateView(PermissionRequiredMixin, OwnerCourseEditMixin, CreateView):
+    permission_required = 'courses.add_course'
 
 
 class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
