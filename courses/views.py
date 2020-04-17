@@ -39,3 +39,8 @@ class CourseCreateView(OwnerEditMixin, CreateView):
 
 class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
     pass
+
+
+class CourseDeleteView(OwnerCourseMixin, DeleteView):
+    template_name = 'courses/manage/course/delete.html'
+    success_url = reverse_lazy('manage_course_list')
