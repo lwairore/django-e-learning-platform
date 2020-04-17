@@ -41,8 +41,8 @@ class CourseCreateView(PermissionRequiredMixin, OwnerCourseEditMixin, CreateView
     permission_required = 'courses.add_course'
 
 
-class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
-    pass
+class CourseUpdateView(PermissionRequiredMixin, OwnerCourseEditMixin, UpdateView):
+    permission_required = 'courses.change_course'
 
 
 class CourseDeleteView(OwnerCourseMixin, DeleteView):
