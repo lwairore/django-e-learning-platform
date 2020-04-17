@@ -3,6 +3,8 @@ from .models import Course
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, \
     DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, \
+    PermissionRequiredMixin
 
 # Create your views here.
 
@@ -19,8 +21,10 @@ class OwnerEditMixin(object):
         return super(OwnerEditMixin, self).form_valid(form)
 
 
-class OwnerCourseMixin(OwnerMixin):
+class OwnerCourseMixin(OwnerMixin, LoginRequiredMixin):
     model = Course
+    fields = ['subject', 'title', 'slug', 'overview']
+    success_url = reverse_lazy('manage_course_list')
 
 
 class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
@@ -31,10 +35,6 @@ class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
 
 class ManageCourseListView(OwnerCourseMixin, ListView):
     template_name = 'courses/manage/course/list.html'
-
-
-class CourseCreateView(OwnerEditMixin, CreateView):
-    pass
 
 
 class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
